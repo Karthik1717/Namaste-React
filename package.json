@@ -1,0 +1,32 @@
+{
+	"name": "namaste-react",
+	"version": "1.0.0",
+	"description": "This is Namaste React",
+	"main": "App.js",
+	"scripts": {
+		"start": "parcel index.html",
+		"build": "parcel build index.html",
+		"test": "jest"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Karthik1717/Namaste-React.git"
+	},
+	"author": "Karthik Kamath",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Karthik1717/Namaste-React/issues"
+	},
+	"homepage": "https://github.com/Karthik1717/Namaste-React#readme",
+	"devDependencies": {
+		"parcel": "^2.11.0",
+		"process": "^0.11.10"
+	},
+	"dependencies": {
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"browserslist": [
+		"last 2 versions"
+	]
+}
