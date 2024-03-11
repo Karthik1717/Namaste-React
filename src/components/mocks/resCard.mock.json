@@ -1,0 +1,67 @@
+{
+	"info": {
+		"id": "59627",
+		"name": "La Pino'z Pizza",
+		"cloudinaryImageId": "ntjshqsv2k7vxtv7vmib",
+		"locality": "Koramangala",
+		"areaName": "Koramangala",
+		"costForTwo": "₹251 for two",
+		"cuisines": ["Pizzas", "Pastas", "Italian", "Desserts", "Beverages"],
+		"avgRating": 4.2,
+		"parentId": "4961",
+		"avgRatingString": "4.2",
+		"totalRatingsString": "10K+",
+		"sla": {
+			"deliveryTime": 29,
+			"lastMileTravel": 1.5,
+			"serviceability": "SERVICEABLE",
+			"slaString": "25-30 mins",
+			"lastMileTravelString": "1.5 km",
+			"iconType": "ICON_TYPE_EMPTY"
+		},
+		"availability": {
+			"nextCloseTime": "2024-03-04 03:00:00",
+			"opened": true
+		},
+		"badges": {},
+		"isOpen": true,
+		"type": "F",
+		"badgesV2": {
+			"entityBadges": {
+				"imageBased": {},
+				"textBased": {},
+				"textExtendedBadges": {}
+			}
+		},
+		"aggregatedDiscountInfoV3": {
+			"header": "50% OFF",
+			"subHeader": "UPTO ₹100"
+		},
+		"orderabilityCommunication": {
+			"title": {},
+			"subTitle": {},
+			"message": {},
+			"customIcon": {}
+		},
+		"differentiatedUi": {
+			"displayType": "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+			"differentiatedUiMediaDetails": {
+				"mediaType": "ADS_MEDIA_ENUM_IMAGE",
+				"lottie": {},
+				"video": {}
+			}
+		},
+		"reviewsSummary": {},
+		"displayType": "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+		"restaurantOfferPresentationInfo": {}
+	},
+	"analytics": {
+		"context": "seo-data-e7138bd7-c2d9-473e-b020-953b00c2d45f"
+	},
+	"cta": {
+		"link": "https://www.swiggy.com/restaurants/la-pinoz-pizza-koramangala-bangalore-59627",
+		"text": "RESTAURANT_MENU",
+		"type": "WEBLINK"
+	},
+	"widgetId": "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"
+}

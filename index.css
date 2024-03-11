@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.slick-prev:before, .slick-next:before  {
+    font-size: 40px !important;
+}
+
+.slick-prev {
+    left: -50px !important;
+}
+
+.slick-next {
+    right: -50px !important;
+}
+
+.topRated-selected {
+    background-color: orange;
+}

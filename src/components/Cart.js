@@ -12,14 +12,16 @@ const Cart = () => {
 	};
 	return (
 		<div className='text-center m-4 p-4'>
-			<h1 className='text-2xl font-bold'>Cart</h1>
+			<h1 className='text-4xl font-bold py-6 mb-5'>Your Cart</h1>
 			<div className='w-6/12 m-auto'>
-				<button
-					className='p-2 m-2 bg-black text-white rounded-lg'
-					onClick={handleClearCart}
-				>
-					Clear Cart
-				</button>
+				<div className=''>
+					<button
+						className='p-4 m-2 bg-black text-white rounded-lg text-2xl'
+						onClick={handleClearCart}
+					>
+						Clear Cart
+					</button>
+				</div>
 				{cartItems.length === 0 && <h1> Cart is empty</h1>}
 				<ItemList items={cartItems} />
 			</div>

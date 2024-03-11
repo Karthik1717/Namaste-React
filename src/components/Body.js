@@ -4,11 +4,15 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import FoodScroller from "./FoodScroller";
+import UPDATED_DATA from "./data/updatedData.json";
 
 const Body = () => {
 	// Local State Variable - Super powerful variable
 	const [listOfRestaurants, setListOfRestraunt] = useState([]);
 	const [filteredRestaurant, setFilteredRestaurant] = useState([]);
+	const [foodScrollerItems, setFoodScrollerItems] = useState([]);
+	const [topRated, setTopRated] = useState(false);
 
 	const [searchText, setSearchText] = useState("");
 
@@ -21,6 +25,14 @@ const Body = () => {
 		fetchData();
 	}, []);
 
+	useEffect(() => {
+		const filteredList = listOfRestaurants?.filter(
+			(res) => res.info.avgRating > 4.3
+		);
+		const list = topRated ? filteredList : listOfRestaurants;
+		setFilteredRestaurant(list);
+	}, [topRated]);
+
 	const { setUserName, loggedInUser } = useContext(UserContext);
 
 	const fetchData = async () => {
@@ -29,43 +41,66 @@ const Body = () => {
 		);
 
 		const json = await data.json();
-		console.log(
+
+		const initalRestaurants =
 			json?.data?.cards[4]?.card?.card?.gridElements.infoWithStyle
-				.restaurants
-		);
+				.restaurants;
+		const updatedRestaurantList =
+			UPDATED_DATA.cards[0]?.card?.card?.gridElements.infoWithStyle
+				.restaurants;
+
+		const updatedRestaurants = [
+			...initalRestaurants,
+			...updatedRestaurantList,
+		];
 
 		// Optional Chaining
-		setListOfRestraunt(
-			json?.data?.cards[4]?.card?.card?.gridElements.infoWithStyle
-				.restaurants
-		);
-		setFilteredRestaurant(
-			json?.data?.cards[4]?.card?.card?.gridElements.infoWithStyle
-				.restaurants
+		setListOfRestraunt(updatedRestaurants);
+		setFilteredRestaurant(updatedRestaurants);
+
+		setFoodScrollerItems(
+			json?.data?.cards[0].card?.card?.imageGridCards?.info
 		);
 	};
+
+	console.log(foodScrollerItems, "scroll");
 
 	const onlineStatus = useOnlineStatus();
 
 	if (onlineStatus === false)
 		return <h1>You're offline! Check your connection. </h1>;
 
-	return listOfRestaurants?.length === 0 ? (
+	return listOfRestaurants.length === 0 ? (
 		<Shimmer />
 	) : (
 		<div className='body'>
-			<div className='filter flex'>
+			<div className='filter flex w-3/4 m-auto justify-between py-10'>
+				<div className='m-4 p-4 flex items-center text-2xl'>
+					<button
+						className={`px-4 py-2 m-4 bg-gray-100 rounded-lg cursor-pointer ${
+							topRated
+								? "topRated-selected"
+								: "topRated-unselected"
+						}`}
+						onClick={() => {
+							setTopRated(!topRated);
+						}}
+					>
+						Top Rated Restaurants
+					</button>
+				</div>
 				<div className='search m-4 p-4'>
 					<input
 						type='text'
-						className='border border-solid border-black'
+						data-testid='searchInput'
+						className='border border-solid border-black text-2xl rounded-lg'
 						value={searchText}
 						onChange={(e) => {
 							setSearchText(e.target.value);
 						}}
 					/>
 					<button
-						className='px-4 py-2 bg-green-100 m-4 rounded-lg'
+						className='px-4 py-2 bg-green-100 m-4 rounded-lg text-2xl'
 						onClick={() => {
 							// Filter the restraunt cards and update the UI
 							// searchText
@@ -75,7 +110,6 @@ const Body = () => {
 									return res.info.name
 										.toLowerCase()
 										.includes(searchText.toLowerCase());
-									return s;
 								}
 							);
 
@@ -85,29 +119,19 @@ const Body = () => {
 						Search
 					</button>
 				</div>
-				<div className='m-4 p-4 flex items-center'>
-					<button
-						className='px-4 py-2 m-4 bg-gray-100 rounded-lg'
-						onClick={() => {
-							const filteredList = listOfRestaurants?.filter(
-								(res) => res.info.avgRating > 4.3
-							);
-							setFilteredRestaurant(filteredList);
-						}}
-					>
-						Top Rated Restaurants
-					</button>
-				</div>
-				<div className='m-4 p-4 flex items-center'>
+				{/* <div className='m-4 p-4 flex items-center'>
 					<label>UserName : </label>
 					<input
 						className='border border-black px-2 m-2'
 						value={loggedInUser}
 						onChange={(e) => setUserName(e.target.value)}
 					/>
-				</div>
+				</div> */}
 			</div>
-			<div className='flex flex-wrap'>
+			<div>
+				<FoodScroller items={foodScrollerItems} />
+			</div>
+			<div className='flex flex-wrap w-3/4 m-auto py-12'>
 				{filteredRestaurant?.map((restaurant) => (
 					<Link
 						key={restaurant.info.id}
